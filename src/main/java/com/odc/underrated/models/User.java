@@ -1,30 +1,14 @@
 package com.odc.underrated.models;
 
-import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-@Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "full-name")
+    private long id;
     private String fullName;
-
-    @Column(name = "email")
     private String email;
-
-    @Column(name = "password")
     private String password;
-
-    @Column(name = "country")
     private String country;
-
-    @OneToMany(mappedBy = "user")
     private Set<Reel> reels;
 
     public User() {
@@ -37,7 +21,7 @@ public class User {
         this.country = country;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

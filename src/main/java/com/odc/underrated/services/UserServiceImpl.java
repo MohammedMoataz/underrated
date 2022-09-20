@@ -7,15 +7,29 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepo;
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepo.findAll();
+    public User createUser(User user) {
+        return null;
     }
 
+    @Override
+    public List<User> getUsers() {
+        return null;
+    }
+
+    @Override
+    public void batch() {
+
+    }
+
+    @Override
+    public void deleteUser(long id) {
+
+    }
 }

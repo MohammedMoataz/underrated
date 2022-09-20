@@ -1,29 +1,12 @@
 package com.odc.underrated.models;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "reels")
 public class Reel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "caption")
+    private long id;
     private String caption;
-
-    @Column(name = "location")
     private String location;
-
-    @Column(name = "likes")
     private int likes;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
-
     public Reel() {
     }
 
@@ -34,7 +17,7 @@ public class Reel {
         this.user = user;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

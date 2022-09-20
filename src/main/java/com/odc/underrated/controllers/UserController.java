@@ -13,16 +13,4 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    UserRepository repo;
-
-    @GetMapping
-    public List<User> getUsers() {
-        return repo.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public Optional<User> getUser(@PathVariable(name = "id") Integer id) {
-        return repo.findById(id);
-    }
 }
