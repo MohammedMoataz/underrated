@@ -59,7 +59,7 @@ public class UserRepositoryImpl implements UserRepository {
                 "update users" +
                         "set full-name = ?, email = ?, password = ?, country = ?" +
                         " where id = ?",
-                user.getFullName(), user.getEmail(), user.getPassword(), user.getCountry()
+                user.getFullName(), user.getEmail(), user.getPassword(), user.getCountry(), user.getId()
         );
 
         return user;

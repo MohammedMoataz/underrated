@@ -26,6 +26,7 @@ public class ReelRepositoryImpl implements ReelRepository {
         insert.setGeneratedKeyName("id");
 
         Map<String, Object> data = new HashMap<>();
+        data.put("video", reel.getVideo());
         data.put("caption", reel.getCaption());
         data.put("location", reel.getLocation());
         data.put("likes", reel.getLikes());
@@ -33,6 +34,7 @@ public class ReelRepositoryImpl implements ReelRepository {
         data.put("user", reel.getUser());
 
         List<String> columns = new ArrayList<>();
+        columns.add("video");
         columns.add("caption");
         columns.add("location");
         columns.add("likes");
@@ -62,7 +64,7 @@ public class ReelRepositoryImpl implements ReelRepository {
                 "update reels" +
                         "set caption = ?, location = ?, date = ?, likes = ?" +
                         " where id = ?",
-                reel.getCaption(), reel.getLocation(), reel.getDate(), reel.getLikes(), reel.getUser()
+                reel.getCaption(), reel.getLocation(), reel.getDate(), reel.getLikes(), reel.getUser().getId()
         );
 
         return reel;

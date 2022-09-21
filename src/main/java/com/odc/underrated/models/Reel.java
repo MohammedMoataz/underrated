@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Reel {
 
     private Long id;
+    private byte[] video;
     private String caption;
     private String location;
     private LocalDate date;
@@ -14,7 +15,8 @@ public class Reel {
     public Reel() {
     }
 
-    public Reel(String caption, String location, int likes, User user) {
+    public Reel(byte[] video, String caption, String location, int likes, User user) {
+        this.video = video;
         this.caption = caption;
         this.location = location;
         this.likes = likes;
@@ -23,6 +25,14 @@ public class Reel {
 
     public Long getId() {
         return id;
+    }
+
+    public byte[] getVideo() {
+        return video;
+    }
+
+    public void setVideo(byte[] video) {
+        this.video = video;
     }
 
     public String getCaption() {
