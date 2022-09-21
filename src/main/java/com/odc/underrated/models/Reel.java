@@ -1,12 +1,16 @@
 package com.odc.underrated.models;
 
+import java.time.LocalDate;
+
 public class Reel {
 
-    private long id;
+    private Long id;
     private String caption;
     private String location;
+    private LocalDate date;
     private int likes;
     private User user;
+
     public Reel() {
     }
 
@@ -17,7 +21,7 @@ public class Reel {
         this.user = user;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -37,6 +41,14 @@ public class Reel {
         this.location = location;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public int getLikes() {
         return likes;
     }
@@ -45,11 +57,11 @@ public class Reel {
         this.likes = likes;
     }
 
-    public User getCreator() {
+    public User getUser() {
         return user;
     }
 
-    public void setCreator(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

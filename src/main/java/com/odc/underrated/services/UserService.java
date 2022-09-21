@@ -8,10 +8,12 @@ public interface UserService {
 
     User createUser(User user);
 
+    User getUser(Long id);
+
     List<User> getUsers();
 
-    void batch();
+    User updateUser(User user);
 
-    void deleteUser(long id);
+    void deleteUser(Long id);
 
 }

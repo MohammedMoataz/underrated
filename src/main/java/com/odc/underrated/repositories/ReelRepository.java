@@ -7,9 +7,11 @@ import java.util.List;
 public interface ReelRepository {
     Reel createReel(Reel reel);
 
+    Reel getReel(Long id);
+
     List<Reel> getReels();
 
     Reel updateReel(Reel reel);
 
-    void deleteReel(long id);
+    void deleteReel(Long id);
 }

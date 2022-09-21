@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class User {
 
-    private long id;
+    private Long id;
     private String fullName;
     private String email;
     private String password;
@@ -21,7 +21,7 @@ public class User {
         this.country = country;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
