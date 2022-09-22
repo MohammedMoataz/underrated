@@ -1,13 +1,13 @@
 package com.odc.underrated.services;
 
+import com.odc.underrated.dtos.req.UserReq;
+import com.odc.underrated.dtos.res.UserRes;
 import com.odc.underrated.models.User;
 import com.odc.underrated.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service("userService")
@@ -17,27 +17,63 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public User createUser(User user) {
-        return userRepository.createUser(user);
+    public UserRes save(UserReq userReq) {
+        User user = mapEntityFromRequest(userReq);
+        user = userRepository.save(user);
+        return mapEntityToResponse(user);
     }
 
     @Override
-    public User getUser(Long id) {
-        return userRepository.getUser(id);
+    public UserRes findById(String id) {
+        return mapEntityToResponse(userRepository.findById(id).get());
     }
 
     @Override
-    public List<User> getUsers() {
-        return userRepository.getUsers();
+    public List<UserRes> findAll() {
+        List<UserRes> response = new ArrayList<>();
+        userRepository.findAll().forEach(user ->
+                response.add(mapEntityToResponse(user))
+        );
+
+        return response;
     }
 
     @Override
-    public User updateUser(User user) {
-        return userRepository.updateUser(user);
+    public UserRes updateUser(String userId, UserReq userReq) {
+        User user = userRepository.findById(userId).get();
+        updateEntityFromResponse(user, userReq);
+        userRepository.save(user);
+        return mapEntityToResponse(user);
     }
 
     @Override
-    public void deleteUser(Long id) {
-        userRepository.deleteUser(id);
+    public void deleteById(String id) {
+        userRepository.deleteById(id);
+    }
+
+    private User mapEntityFromRequest(UserReq userReq) {
+        return new User(
+                userReq.getName(),
+                userReq.getEmail(),
+                userReq.getPassword(),
+                userReq.getCountry()
+        );
+    }
+
+    private void updateEntityFromResponse(User user, UserReq userReq) {
+        user.setName(userReq.getName());
+        user.setEmail(userReq.getEmail());
+        user.setPassword(userReq.getPassword());
+        user.setCountry(userReq.getCountry());
+    }
+
+    private UserRes mapEntityToResponse(User user) {
+        return new UserRes(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getCountry()
+        );
     }
 }

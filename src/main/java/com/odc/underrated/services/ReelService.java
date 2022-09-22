@@ -1,19 +1,19 @@
 package com.odc.underrated.services;
 
-import com.odc.underrated.models.Reel;
-import com.odc.underrated.models.User;
+import com.odc.underrated.dtos.req.ReelReq;
+import com.odc.underrated.dtos.res.ReelRes;
 
 import java.util.List;
 
 public interface ReelService {
 
-    Reel createReel(Reel reel);
+    ReelRes save(ReelReq reelReq);
 
-    Reel getReel(Long id);
+    ReelRes findById(String id);
 
-    List<Reel> getReels();
+    List<ReelRes> findAll();
 
-    Reel updateReel(Reel reel);
+    ReelRes updateReel(String reelId, ReelReq reelReq);
 
-    void deleteReel(Long id);
+    void deleteById(String id);
 }

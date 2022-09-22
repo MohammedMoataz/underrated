@@ -1,34 +1,15 @@
-package com.odc.underrated.models;
+package com.odc.underrated.dtos.res;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+public class UserRes {
 
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @Column(name = "id")
-    private final String id;
-    @Column(name = "name")
+    private String id;
     private String name;
-    @Column(name = "email")
     private String email;
-    @Column(name = "password")
     private String password;
-    @Column(name = "country")
     private String country;
-    @OneToMany(mappedBy = "user")
-    private final Set<Reel> reels = new HashSet<>();
 
-    public User() {
-        this.id = UUID.randomUUID().toString();
-    }
-
-    public User(String name, String email, String password, String country) {
-        this.id = UUID.randomUUID().toString();
+    public UserRes(String id, String name, String email, String password, String country) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -71,7 +52,4 @@ public class User {
         this.country = country;
     }
 
-    public Set<Reel> getReels() {
-        return reels;
-    }
 }
