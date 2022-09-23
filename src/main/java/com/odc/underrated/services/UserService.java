@@ -1,19 +1,20 @@
 package com.odc.underrated.services;
 
-import com.odc.underrated.models.User;
+import com.odc.underrated.dtos.req.UserReq;
+import com.odc.underrated.dtos.res.UserRes;
 
 import java.util.List;
 
 public interface UserService {
 
-    User createUser(User user);
+    UserRes save(UserReq userReq);
 
-    User getUser(Long id);
+    UserRes findById(String id);
 
-    List<User> getUsers();
+    List<UserRes> findAll();
 
-    User updateUser(User user);
+    UserRes updateUser(String userId, UserReq userReq);
 
-    void deleteUser(Long id);
+    void deleteById(String id);
 
 }

@@ -1,6 +1,7 @@
 package com.odc.underrated.controllers;
 
-import com.odc.underrated.models.Reel;
+import com.odc.underrated.dtos.req.ReelReq;
+import com.odc.underrated.dtos.res.ReelRes;
 import com.odc.underrated.services.ReelService;
 import com.odc.underrated.util.ServiceError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,38 +13,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/r")
+@RequestMapping("/api")
 public class ReelController {
     @Autowired
     private ReelService reelService;
 
-    @RequestMapping(value = "/reel", method = RequestMethod.POST)
-    public @ResponseBody Reel createReel(@RequestBody Reel reel) {
-        return reelService.createReel(reel);
+    @RequestMapping(value = "/reel/", method = RequestMethod.POST)
+    public @ResponseBody ReelRes createReel(@RequestBody ReelReq reelReq) {
+        return reelService.save(reelReq);
     }
 
     @RequestMapping(value = "/reels", method = RequestMethod.GET)
-    public @ResponseBody List<Reel> getReels() {
-        return reelService.getReels();
+    public @ResponseBody List<ReelRes> getReels() {
+        return reelService.findAll();
     }
 
     @RequestMapping(value = "/reel/{id}", method = RequestMethod.GET)
-    public @ResponseBody Reel getReel(@PathVariable(value = "id") Long id) {
-        return reelService.getReel(id);
+    public @ResponseBody ReelRes getReel(@PathVariable(value = "id") String id) {
+        return reelService.findById(id);
     }
 
-    @RequestMapping(value = "/reel", method = RequestMethod.PUT)
-    public @ResponseBody Reel updateReel(@RequestBody Reel reel) {
-        return reelService.updateReel(reel);
+    @RequestMapping(value = "/reel/{id}", method = RequestMethod.PUT)
+    public @ResponseBody ReelRes updateReel(@PathVariable(value = "id") String id, @RequestBody ReelReq reelReq) {
+        return reelService.updateReel(id, reelReq);
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public @ResponseBody Object delete(@PathVariable(value = "id") Long id) {
-        reelService.deleteReel(id);
+    @RequestMapping(value = "/reel/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody Object delete(@PathVariable(value = "id") String id) {
+        reelService.deleteById(id);
         return null;
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/reel/test", method = RequestMethod.GET)
     public @ResponseBody Object test() {
         throw new DataAccessException("Testing exception thrown") {
         };

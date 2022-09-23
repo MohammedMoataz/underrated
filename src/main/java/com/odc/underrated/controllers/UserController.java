@@ -1,7 +1,7 @@
 package com.odc.underrated.controllers;
 
-
-import com.odc.underrated.models.User;
+import com.odc.underrated.dtos.req.UserReq;
+import com.odc.underrated.dtos.res.UserRes;
 import com.odc.underrated.services.UserService;
 import com.odc.underrated.util.ServiceError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,38 +13,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/u")
+@RequestMapping("/api")
 public class UserController {
     @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public @ResponseBody User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public @ResponseBody UserRes save(@RequestBody UserReq userReq) {
+        return userService.save(userReq);
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public @ResponseBody List<User> getUsers() {
-        return userService.getUsers();
+    public @ResponseBody List<UserRes> findAll() {
+        return userService.findAll();
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public @ResponseBody User getUser(@PathVariable(value = "id") Long id) {
-        return userService.getUser(id);
+    public @ResponseBody UserRes findById(@PathVariable(value = "id") String id) {
+        return userService.findById(id);
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.PUT)
-    public @ResponseBody User updateUser(@RequestBody User user) {
-        return userService.updateUser(user);
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+    public @ResponseBody UserRes updateUser(@PathVariable(value = "id") String id, @RequestBody UserReq userReq) {
+        return userService.updateUser(id, userReq);
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public @ResponseBody Object delete(@PathVariable(value = "id") Long id) {
-        userService.deleteUser(id);
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody Object delete(@PathVariable(value = "id") String id) {
+        userService.deleteById(id);
         return null;
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/test", method = RequestMethod.GET)
     public @ResponseBody Object test() {
         throw new DataAccessException("Testing exception thrown") {
         };

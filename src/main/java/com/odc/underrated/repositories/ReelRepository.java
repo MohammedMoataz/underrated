@@ -1,17 +1,9 @@
 package com.odc.underrated.repositories;
 
 import com.odc.underrated.models.Reel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface ReelRepository {
-    Reel createReel(Reel reel);
-
-    Reel getReel(Long id);
-
-    List<Reel> getReels();
-
-    Reel updateReel(Reel reel);
-
-    void deleteReel(Long id);
+@Repository
+public interface ReelRepository extends JpaRepository<Reel, String> {
 }

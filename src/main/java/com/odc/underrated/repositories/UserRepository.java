@@ -1,18 +1,9 @@
 package com.odc.underrated.repositories;
 
 import com.odc.underrated.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface UserRepository {
-
-    User createUser(User user);
-
-    User getUser(Long id);
-
-    List<User> getUsers();
-
-    User updateUser(User user);
-
-    void deleteUser(Long id);
+@Repository
+public interface UserRepository extends JpaRepository<User, String> {
 }
