@@ -1,6 +1,7 @@
 package com.odc.underrated.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +16,7 @@ public class Reel {
     private final String id;
 
     @Column(name = "video")
+    @NotNull
     private String video;
 
     @Column(name = "caption")
@@ -28,6 +30,7 @@ public class Reel {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @NotNull
     private User user;
 
     @ManyToMany

@@ -9,18 +9,26 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
+    private static final String REGEX_PATTERN = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 
     @Override
     public UserRes save(UserReq userReq) {
         User user = mapEntityFromRequest(userReq);
-        user = userRepository.save(user);
-        return mapEntityToResponse(user);
+
+        if (user != null) {
+            user = userRepository.save(user);
+            return mapEntityToResponse(user);
+        }
+
+        return null;
     }
 
     @Override
@@ -52,12 +60,14 @@ public class UserServiceImpl implements UserService {
     }
 
     private User mapEntityFromRequest(UserReq userReq) {
-        return new User(
+        return patternMatches(userReq.getEmail())
+                ? new User(
                 userReq.getName(),
                 userReq.getEmail(),
                 userReq.getPassword(),
                 userReq.getCountry()
-        );
+        )
+                : null;
     }
 
     private void updateEntityFromResponse(User user, UserReq userReq) {
@@ -75,5 +85,11 @@ public class UserServiceImpl implements UserService {
                 user.getPassword(),
                 user.getCountry()
         );
+    }
+
+    private static boolean patternMatches(String emailAddress) {
+        return Pattern.compile(REGEX_PATTERN)
+                .matcher(emailAddress)
+                .matches();
     }
 }

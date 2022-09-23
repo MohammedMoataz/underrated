@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -19,6 +20,7 @@ public class User {
     private final String id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "email")

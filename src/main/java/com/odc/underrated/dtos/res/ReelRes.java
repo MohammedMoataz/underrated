@@ -15,8 +15,7 @@ public class ReelRes {
     public ReelRes() {
     }
 
-    public  ReelRes(String id, String video, String caption, String location,
-                    LocalDate date, UserRes creator) {
+    public ReelRes(String id, String video, String caption, String location, LocalDate date, UserRes creator) {
         this.id = id;
         this.video = video;
         this.caption = caption;
