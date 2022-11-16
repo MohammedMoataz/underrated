@@ -60,6 +60,14 @@ public class ReelServiceImpl implements ReelService {
         reelRepository.deleteById(id);
     }
 
+    @Override
+    public void like(String reelId, String userId) {
+        Reel reel = reelRepository.findById(reelId).get();
+        User user = userRepository.findById(userId).get();
+        reel.getLikedUsers().add(user);
+        reelRepository.save(reel);
+    }
+
     private Reel mapEntityFromRequest(ReelReq reelReq, User user) {
         return new Reel(
                 reelReq.getVideo(),

@@ -44,6 +44,13 @@ public class ReelController {
         return null;
     }
 
+    @RequestMapping(value = "/reel/like/{reel_id}/{user_id}", method = RequestMethod.POST)
+    public @ResponseBody Object like(@PathVariable(value = "reel_id") String reelId,
+                                     @PathVariable(value = "user_id") String userId) {
+        reelService.like(reelId, userId);
+        return null;
+    }
+
     @RequestMapping(value = "/reel/test", method = RequestMethod.GET)
     public @ResponseBody Object test() {
         throw new DataAccessException("Testing exception thrown") {

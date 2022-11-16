@@ -17,4 +17,6 @@ public interface ReelService {
     ReelRes updateReel(String reelId, ReelReq reelReq);
 
     void deleteById(String id);
+
+    void like(String reelId, String userId);
 }
